@@ -165,7 +165,7 @@ gulp.task('package', ['build'], function() {
 // Runs copy then runs sass & javascript in parallel
 gulp.task('build', ['clean'], function(done) {
   sequence('copy',
-          ['less', 'javascript'/*, 'lint'*/], 'deploy',
+          ['sass', 'javascript'/*, 'lint'*/], 'deploy',
           done);
 });
 
@@ -191,10 +191,10 @@ gulp.task('clean:css', function() {
 });
 
 // Deploy to ftp server
-var ftpCredentials = JSON.parse(fs.readFileSync('./config.json')).ftp_credentials;
-    ftpCredentials['log'] = $.util.log;
-var ftpConn = ftp.create(ftpCredentials);
 gulp.task( 'deploy', function () {
+  var ftpCredentials = JSON.parse(fs.readFileSync('./config.json')).ftp_credentials;
+      ftpCredentials['log'] = $.util.log;
+  var ftpConn = ftp.create(ftpCredentials);
   var globs = [
       '**/*',
       '!**/node_modules/**',
