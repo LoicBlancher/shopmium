@@ -1,0 +1,8 @@
+.DS_Store
+shopmium/node_modules
+shopmium/npm-debug.log
+shopmium/dist/js
+shopmium/dist/css
+*.sass-cache*
+*.log
+*.swp

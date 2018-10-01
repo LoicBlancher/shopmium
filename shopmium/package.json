@@ -1,0 +1,43 @@
+{
+  "name": "shopmium",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "start": "gulp",
+    "dev": "gulp build --dev",
+    "build": "gulp build --production",
+    "package": "gulp package --production"
+  },
+  "keywords": [],
+  "author": "Gradiweb",
+  "license": "private",
+  "private": true,
+  "devDependencies": {
+    "del": "^2.2.0",
+    "gulp": "gulpjs/gulp#4.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-clean-css": "^3.3.1",
+    "gulp-concat": "^2.5.2",
+    "gulp-flatten": "^0.2.0",
+    "gulp-if": "^2.0.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-load-plugins": "^1.1.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.0.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.2.0",
+    "gulp-uncss": "^1.0.4",
+    "gulp-util": "^3.0.7",
+    "gulp-zip": "^4.0.0",
+    "jshint": "^2.8.0",
+    "run-sequence": "^1.1.5",
+    "vinyl-ftp": "^0.6.1",
+    "yargs": "^3.8.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LoicBlancher/shopmium"
+  }
+}
