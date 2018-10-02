@@ -22,7 +22,10 @@
 		</div>
 		<div class="row" id="ms-footer-socials">
 			<ul>
-				<li><i class="far fa-address-book"></i></li>
+				<li class="ms-wrapper-social-icons"><i class="fab fa-facebook-f"></i></li>
+				<li class="ms-wrapper-social-icons"><i class="fab fa-instagram"></i></li>
+				<li class="ms-wrapper-social-icons"><i class="fab fa-twitter"></i></li>
+				<li class="ms-wrapper-social-icons"><i class="fab fa-youtube"></i></li>
 			</ul>
 		</div>
 	</div>
