@@ -1,5 +1,8 @@
 <?php
 
+require_once ( get_stylesheet_directory() . '/functions/robin-functions.php' );
+require_once ( get_stylesheet_directory() . '/functions/miguel-functions.php' );
+
 add_action('after_setup_theme', 'uncode_language_setup');
 
 function uncode_language_setup()
@@ -30,37 +33,83 @@ function theme_enqueue_styles()
 
 	wp_enqueue_style('ms-styles', get_stylesheet_directory_uri() . '/miguel.css', $child_style, $resources_version);
 
+	wp_enqueue_style('rp-styles', get_stylesheet_directory_uri() . '/dist/css/app.css', $child_style, $resources_version);
 }
 
 add_action('wp_enqueue_scripts', 'theme_enqueue_styles');
 
-  function footer_services_menu(){
-	wp_nav_menu([
-	'theme_location'  => 'footer-services',
-	'menu'            => '',
-	'container'       => 'div',
-	'container_class' => 'menu-{menu slug}-container',
-	'container_id'    => '',
-	'menu_class'      => 'menu',
-	'menu_id'         => '',
-	'echo'            => true,
-	'fallback_cb'     => 'wp_page_menu',
-	'before'          => '',
-	'after'           => '',
-	'link_before'     => '',
-	'link_after'      => '',
-	'items_wrap'      => '<ul>%3$s</ul>',
-	'depth'           => 0,
-	'walker'          => ''
-   ]);
-  }
+	function footer_services_menu(){
+		wp_nav_menu([
+		'theme_location'  => 'footer-services',
+		'menu'            => '',
+		'container'       => 'div',
+		'container_class' => 'menu-{menu slug}-container',
+		'container_id'    => '',
+		'menu_class'      => 'menu',
+		'menu_id'         => '',
+		'echo'            => true,
+		'fallback_cb'     => 'wp_page_menu',
+		'before'          => '',
+		'after'           => '',
+		'link_before'     => '',
+		'link_after'      => '',
+		'items_wrap'      => '<ul>%3$s</ul>',
+		'depth'           => 0,
+		'walker'          => ''
+		 ]);
+	}
+
+		function footer_aboutus_menu(){
+			wp_nav_menu([
+			'theme_location'  => 'footer-aboutus-menu',
+			'menu'            => '',
+			'container'       => 'div',
+			'container_class' => 'menu-{menu slug}-container',
+			'container_id'    => '',
+			'menu_class'      => 'menu',
+			'menu_id'         => '',
+			'echo'            => true,
+			'fallback_cb'     => 'wp_page_menu',
+			'before'          => '',
+			'after'           => '',
+			'link_before'     => '',
+			'link_after'      => '',
+			'items_wrap'      => '<ul>%3$s</ul>',
+			'depth'           => 0,
+			'walker'          => ''
+			 ]);
+		}
+
+		function footer_blog_menu(){
+			wp_nav_menu([
+			'theme_location'  => 'footer-blog-menu',
+			'menu'            => '',
+			'container'       => 'div',
+			'container_class' => 'menu-{menu slug}-container',
+			'container_id'    => '',
+			'menu_class'      => 'menu',
+			'menu_id'         => '',
+			'echo'            => true,
+			'fallback_cb'     => 'wp_page_menu',
+			'before'          => '',
+			'after'           => '',
+			'link_before'     => '',
+			'link_after'      => '',
+			'items_wrap'      => '<ul>%3$s</ul>',
+			'depth'           => 0,
+			'walker'          => ''
+			 ]);
+		}
 
 
-  function register_shopmium_menu()
+
+	function register_shopmium_menus()
 {
 	register_nav_menus(array( // Using array to specify more menus if needed
-		'footer-services' => __('Footer services', 'uncode'), // Main Navigation
+		'footer-services' => __('Footer Services', 'uncode'), // Main Navigation
+		'footer-aboutus-menu' => __('Footer About Us', 'uncode'), // Main Navigation
+		'footer-blog-menu' => __('Footer Blog', 'uncode'), // Main Navigation
 	));
 }
 
- add_action('init', 'register_shopmium_menu');
+ add_action('init', 'register_shopmium_menus');
