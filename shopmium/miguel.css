@@ -9,3 +9,10 @@ footer{padding: 50px 140px;display: inherit;}
 #ms-footer-socials ul{margin:0 auto;display: table;}
 .ms-wrapper-social-icons{float: left;width: 40px;height: 40px;border: 1px solid #00000054;border-radius: 50px;margin: 0 10px;}
 .ms-wrapper-social-icons svg{font-size: 17px;margin-top:10px;color:#a9a9a9;}
+
+/* Home */
+.ms-header-home{padding: 150px 180px;}
+.ms-header-title{text-align: center;color: white!important;}
+.ms-header-p{text-align: center;margin-top: 25px;color: white;font-size: 17px;letter-spacing: 0.05em;}
+.ms-transparent-btn{border: 1px solid white;padding: 10px 30px;border-radius: 50px;}
+#ms-header-home-btn{margin: 30px auto;display: table;padding: 8px 80px;color: white;text-transform: uppercase;}
