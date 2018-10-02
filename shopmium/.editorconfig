@@ -17,7 +17,7 @@ indent_style = space
 indent_style = space
 indent_size = 2
 
-[{package.json,.jshintrc,gulpfile.js}]
+[{package.json,.jshintrc,gulpfile.js,config.json}]
 indent_style = space
 indent_size = 2
 
