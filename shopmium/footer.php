@@ -22,7 +22,7 @@
 		</div>
 		<div class="row" id="ms-footer-socials">
 			<ul>
-				<li></li>
+				<li><i class="far fa-address-book"></i></li>
 			</ul>
 		</div>
 	</div>
