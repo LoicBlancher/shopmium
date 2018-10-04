@@ -159,4 +159,38 @@ function carousel_testimonials(){
     get_template_part('loop','testimonials');
 }
 
+
+add_shortcode('download','download_shopmium_resources');
+function download_shopmium_resources($atts){
+    $atts = shortcode_atts(array(
+        'resource' => ''
+    ), $atts);
+    $loop = new WP_Query( array(
+            'orderby'           => 'menu_order title',
+            'order'             => 'ASC',
+            'post_type'         => 'downloads',
+            'tax_query'         => array( array(
+                'taxonomy'  => 'categories',
+                'field'     => 'slug',
+                'terms'     => array( sanitize_title( $atts['resource'] ) )
+            ) )
+        ) );?>
+        <div id="ms-container-resourced">
+           <?php
+            if ( $loop->have_posts() ) :
+             while ( $loop->have_posts() ) : $loop->the_post();?>
+				<div class="ms-wrapper-resourced">
+	                <?php $image = get_field('source_download');
+	                if( !empty($image) ): ?>
+	               	<img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>"/>
+	               	<span class="ms-title-downloads"><a href="<?php echo $image['url'] ?>" download><?php the_title(); ?></span>
+	                <?php endif;?>
+				</div>
+             <?php endwhile;
+            endif;
+            wp_reset_postdata();?>
+        </div>
+<?php
+}
+
 ?>
