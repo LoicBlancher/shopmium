@@ -7,17 +7,31 @@ function shopnium_scripts()
         wp_register_script('iconsshopnium', get_stylesheet_directory_uri() . '/assets/js/all.js', array('jquery'), '1.0.0',true);
         wp_enqueue_script('iconsshopnium');
 
+        wp_register_script('slickjs', get_stylesheet_directory_uri() . '/assets/js/slick.min.js', array('jquery'), '1.0.0',true);
+        wp_enqueue_script('slickjs');
+
         wp_register_script('customjs', get_stylesheet_directory_uri() . '/assets/js/custom.js', array('jquery'), '1.0.0',true);
         wp_enqueue_script('customjs');
-
-
-
 
     }
 }
 
 
 add_action('init', 'shopnium_scripts'); // Add Custom Scripts to wp_head
+
+function shopmium_styles()
+{
+    wp_register_style('slickt', get_stylesheet_directory_uri() . '/assets/scss/slick-theme.css', array(), '1.0', 'all');
+    wp_enqueue_style('slickt'); // Enqueue it!
+
+    wp_register_style('slicks', get_stylesheet_directory_uri() . '/assets/scss/slick.css', array(), '1.0', 'all');
+    wp_enqueue_style('slicks'); // Enqueue it!
+
+}
+
+add_action('wp_enqueue_scripts', 'shopmium_styles');
+
+
 
 // Ms - Custom post Testimonials
 function custom_post_testimonials() {
