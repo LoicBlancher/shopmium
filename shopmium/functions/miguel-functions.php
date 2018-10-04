@@ -78,6 +78,82 @@ function custom_post_testimonials() {
 add_action('init','custom_post_testimonials',0);
 
 
+// Ms - Custom post Downloads
+function custom_post_downloads() {
+    $labels = array(
+        'name'                => _x( 'Downloads', 'Post Type General Name', 'uncode' ),
+        'singular_name'       => _x( 'Download', 'Post Type Singular Name', 'uncode' ),
+        'menu_name'           => __( 'Downloads', 'uncode' ),
+        'parent_item_colon'   => __( 'Download parent:', 'uncode' ),
+        'all_items'           => __( 'All Resources', 'uncode' ),
+        'view_item'           => __( 'View Resource', 'uncode' ),
+        'add_new_item'        => __( 'Add Resource', 'uncode' ),
+        'add_new'             => __( 'Add New', 'uncode' ),
+        'edit_item'           => __( 'Edit Resource', 'uncode' ),
+        'update_item'         => __( 'Update Resource', 'uncode' ),
+        'search_items'        => __( 'Search Resource', 'uncode' ),
+        'not_found'           => __( 'Not Found', 'uncode' ),
+        'not_found_in_trash'  => __( 'Not found in Trash', 'uncode' ),
+    );
+
+
+    $args = array(
+        'label'               => __( 'downloads', 'uncode' ),
+        'description'         => __( 'Shopmium Resource Downloads', 'uncode' ),
+        'labels'              => $labels,
+        'supports'            => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'comments', 'revisions', 'custom-fields', ),
+        'taxonomies'          => array( 'genres' ),
+        'hierarchical'        => false,
+        'public'              => true,
+        'show_ui'             => true,
+        'show_in_menu'        => true,
+        'show_in_nav_menus'   => true,
+        'show_in_admin_bar'   => true,
+        'menu_position'       => 5,
+        'can_export'          => true,
+        'has_archive'         => false,
+        'exclude_from_search' => false,
+        'publicly_queryable'  => false,
+        'capability_type'     => 'page',
+    );
+
+    register_post_type( 'downloads', $args );
+}
+
+add_action('init','custom_post_downloads',0);
+
+// Ms - Custom Taxonomy Downloads
+
+function create_categories_downloads()
+{
+    $labels = [
+        'name'              => _x('Categories', 'taxonomy general name'),
+            'singular_name'     => _x('Category', 'taxonomy singular name'),
+            'search_items'      => __('Search Category'),
+            'all_items'         => __('All Categories'),
+            'parent_item'       => __('Parent Category'),
+            'parent_item_colon' => __('Parent Category:'),
+            'edit_item'         => __('Edit Category'),
+            'update_item'       => __('Update Category'),
+            'add_new_item'      => __('Add New Category'),
+            'new_item_name'     => __('New Category Name'),
+            'menu_name'         => __('Categories'),
+            ];
+            $args = [
+            'hierarchical'      => true,
+            'labels'            => $labels,
+            'show_ui'           => true,
+            'show_admin_column' => true,
+            'query_var'         => true,
+            'rewrite'           => ['slug' => 'categories'],
+];
+register_taxonomy('categories', ['downloads'], $args);
+}
+add_action('init', 'create_categories_downloads');
+
+
+
+
 add_shortcode('testimonials','carousel_testimonials');
 function carousel_testimonials(){
     get_template_part('loop','testimonials');
