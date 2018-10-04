@@ -28,8 +28,9 @@ footer{padding: 50px 140px;display: inherit;}
 .ms-image-customer-testi{width: 200px;}
 
 /* */
-.ms-wrapper-downloads{width: 100%;float: left;}
+.ms-container-resourced{width: 100%;float: left;position: relative;}
 .ms-wrapper-resourced{width: 25%; float: left;margin:20px;}
+.ms-paginator-resources{position: absolute;bottom: 0;}
 .ms-single-resource-download{}
 .ms-title-downloads
 
