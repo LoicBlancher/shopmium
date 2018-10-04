@@ -16,3 +16,9 @@ footer{padding: 50px 140px;display: inherit;}
 .ms-header-p{text-align: center;margin-top: 25px;color: white;font-size: 17px;letter-spacing: 0.05em;}
 .ms-transparent-btn{border: 1px solid white;padding: 10px 30px;border-radius: 50px;}
 #ms-header-home-btn{margin: 30px auto;display: table;padding: 8px 80px;color: white;text-transform: uppercase;}
+.ms-subtitle{text-transform: uppercase;font-weight: bold;}
+.ms-padding-home{padding: 20px 30px;}
+.ms-wrapper-second-section{padding: 20px 30px 0 30px;}
+#ms-title-second-section{text-align: center;}
+#ms-p-second-section{text-align: center;margin-top:20px;}
+.ms-icons-second-section-home{width: 67px;}
