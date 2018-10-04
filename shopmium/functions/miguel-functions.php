@@ -165,10 +165,13 @@ function download_shopmium_resources($atts){
     $atts = shortcode_atts(array(
         'resource' => ''
     ), $atts);
-    $loop = new WP_Query( array(
+    $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+    $loop = new WP_Query(array(
             'orderby'           => 'menu_order title',
             'order'             => 'ASC',
             'post_type'         => 'downloads',
+            'posts_per_page'    => 6,
+            'paged'             => $paged,
             'tax_query'         => array( array(
                 'taxonomy'  => 'categories',
                 'field'     => 'slug',
@@ -177,6 +180,7 @@ function download_shopmium_resources($atts){
         ) );?>
         <div id="ms-container-resourced">
            <?php
+
             if ( $loop->have_posts() ) :
              while ( $loop->have_posts() ) : $loop->the_post();?>
 				<div class="ms-wrapper-resourced">
@@ -187,6 +191,21 @@ function download_shopmium_resources($atts){
 	                <?php endif;?>
 				</div>
              <?php endwhile;
+             $total_pages = $loop->max_num_pages;
+
+                 if ($total_pages > 1){
+
+                     $current_page = max(1, get_query_var('paged'));
+
+                     echo paginate_links(array(
+                         'base' => get_pagenum_link(1) . '%_%',
+                         'format' => '/page/%#%',
+                         'current' => $current_page,
+                         'total' => $total_pages,
+                         'prev_text'    => __('« prev'),
+                         'next_text'    => __('next »'),
+                     ));
+                 }
             endif;
             wp_reset_postdata();?>
         </div>
