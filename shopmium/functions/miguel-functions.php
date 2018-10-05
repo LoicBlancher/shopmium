@@ -21,6 +21,10 @@ add_action('init', 'shopnium_scripts'); // Add Custom Scripts to wp_head
 
 function shopmium_styles()
 {
+
+	wp_register_style('custommig', get_stylesheet_directory_uri() . '/assets/scss/miguel.css', array(), '1.0', 'all');
+	wp_enqueue_style('custommig'); // Enqueue it!
+
     wp_register_style('slickt', get_stylesheet_directory_uri() . '/assets/scss/slick-theme.css', array(), '1.0', 'all');
     wp_enqueue_style('slickt'); // Enqueue it!
 
