@@ -505,8 +505,11 @@
 							<div class="post-body">' . uncode_remove_wpautop($the_content . $content_after_body) . '</div>
 						</div>
 					</article>';
-
+					//
 	endwhile; // end of the loop. ?>
+
+
+
 
 <?php get_footer(); ?>
 

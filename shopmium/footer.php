@@ -1,3 +1,12 @@
+<div id="modal-demo" class="modal">
+  <div class="ms-modal-content">
+  	  <a href="#" class="ms-close-modal"><i class="far fa-times-circle"></i></a>
+      <?php echo do_shortcode( '[contact-form-7 id="10" title="Demo form"]' ); ?>
+  </div>
+
+</div>
+
+
 <footer class="footer">
 	<div class="container">
 		<div class="row">

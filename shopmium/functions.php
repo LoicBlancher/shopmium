@@ -31,8 +31,6 @@ function theme_enqueue_styles()
 
 	wp_enqueue_style('child-style', get_stylesheet_directory_uri() . '/style.css', $child_style, $resources_version);
 
-	wp_enqueue_style('ms-styles', get_stylesheet_directory_uri() . '/miguel.css', $child_style, $resources_version);
-
 	wp_enqueue_style('rp-styles', get_stylesheet_directory_uri() . '/dist/css/app.css', $child_style, $resources_version);
 }
 
