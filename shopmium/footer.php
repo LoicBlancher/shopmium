@@ -1,6 +1,10 @@
 <div id="modal-demo" class="modal">
   <div class="ms-modal-content">
-  	  <a href="#" class="ms-close-modal"><i class="far fa-times-circle"></i></a>
+  	<div id="ms-title-modal-form">
+      <h2>Schedule a demo</h2>
+      <div class="ms-orange-separator" id="ms-separator-title-modal"></div>
+  	</div>
+  	  <a href="#" class="ms-close-modal"><i class="fa fa-times" aria-hidden="true"></i></a>
       <?php echo do_shortcode( '[contact-form-7 id="10" title="Demo form"]' ); ?>
   </div>
 
@@ -31,7 +35,7 @@
 		</div>
 		<div class="row" id="ms-footer-socials">
 			<ul>
-				<li class="ms-wrapper-social-icons"><i class="fab fa-facebook-f"></i></li>
+				<li class="ms-wrapper-social-icons"><i class="fa fa-facebook" aria-hidden="true"></i></li>
 				<li class="ms-wrapper-social-icons"><i class="fab fa-instagram"></i></li>
 				<li class="ms-wrapper-social-icons"><i class="fab fa-twitter"></i></li>
 				<li class="ms-wrapper-social-icons"><i class="fab fa-youtube"></i></li>

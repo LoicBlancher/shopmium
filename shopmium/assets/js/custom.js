@@ -21,18 +21,18 @@ jQuery(function ($) {
 
 let modal = document.getElementById('modal-demo');
 let btn= document.querySelector(".menu-item-73223>a");
-let closeModal = document.getElementsByClassName("ms-close-modal");
+let closeModal = document.querySelector("a.ms-close-modal");
 btn.onclick = function() {
     modal.style.display = "block";
 }
 
 closeModal.onclick = function() {
-    modal.style.display = "none";
+    $(modal).fadeOut(1500);
 }
 
 window.onclick = function(event) {
     if (event.target == modal) {
-        modal.style.display = "none";
+        $(modal).fadeOut(1500);
     }
 }
 
