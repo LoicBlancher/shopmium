@@ -183,12 +183,14 @@ function witness_testimonial($atts){
         						 if( !empty($image) ): ?>
         							<img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" class="ms-image-customer-testi"/>
         						 <?php endif; ?>
-        						 <?php the_field('comment'); ?>
-        						 <h4><?php the_title();?> <span> - <?php the_field('customer_position');?></span></h4>
+        						 <p class="ms-quotation-testi">&#x0201C;</p>
+        						 <p class="ms-comment-testi"><?php the_field('comment'); ?></p>
+        						 <p class="ms-quotation-testi" id="ms-quotation-close">&#x0201C;</p>
+        						 <h5><?php the_title();?> <span> - <?php the_field('customer_position');?></span></h5>
         						 <?php
         							$image_brand = get_field('brand_image');
         							if( !empty($image_brand ) ): ?>
-        							 <img src="<?php echo $image_brand ['url']; ?>" alt="<?php echo $image_brand ['alt']; ?>" />
+        							 <img src="<?php echo $image_brand ['url']; ?>" alt="<?php echo $image_brand ['alt']; ?>" class="ms-img-brand-testi"/>
         							<?php endif; ?>
         					</div>
         				 <?php endwhile;
