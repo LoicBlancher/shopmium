@@ -27,14 +27,21 @@ btn.onclick = function() {
 }
 
 closeModal.onclick = function() {
-    $(modal).fadeOut(1500);
+    $(modal).fadeOut(1200);
 }
 
 window.onclick = function(event) {
     if (event.target == modal) {
-        $(modal).fadeOut(1500);
+        $(modal).fadeOut(1200);
     }
 }
+
+
+
+
+
+
+
 
  });
 });

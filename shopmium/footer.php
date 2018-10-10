@@ -35,10 +35,10 @@
 		</div>
 		<div class="row" id="ms-footer-socials">
 			<ul>
-				<li class="ms-wrapper-social-icons"><i class="fa fa-facebook" aria-hidden="true"></i></li>
-				<li class="ms-wrapper-social-icons"><i class="fab fa-instagram"></i></li>
-				<li class="ms-wrapper-social-icons"><i class="fab fa-twitter"></i></li>
-				<li class="ms-wrapper-social-icons"><i class="fab fa-youtube"></i></li>
+				<a href="https://www.facebook.com/ShopmiumUK" target="_blank"><li class="ms-wrapper-social-icons"><i class="fa fa-facebook" aria-hidden="true"></i></li></a>
+				<a href="https://www.instagram.com/shopmium/" target="_blank"><li class="ms-wrapper-social-icons"><i class="fa fa-instagram" aria-hidden="true"></i></li></a>
+				<a href="https://twitter.com/ShopmiumFR" target="_blank"><li class="ms-wrapper-social-icons"><i class="fa fa-twitter" aria-hidden="true"></i></li></a>
+				<a href="https://www.youtube.com/user/ShopmiumFR" target="_blank"><li class="ms-wrapper-social-icons"><i class="fa fa-youtube-play" aria-hidden="true"></i></li></a>
 			</ul>
 		</div>
 	</div>
