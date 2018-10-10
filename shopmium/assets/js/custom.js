@@ -21,7 +21,7 @@ jQuery(function ($) {
 
 let modal = document.getElementById('modal-demo');
 let btn= document.querySelector(".menu-item-73223>a");
-let closeModal = document.querySelector("a.ms-close-modal");
+let closeModal = document.querySelector("span.ms-close-modal");
 btn.onclick = function() {
     modal.style.display = "block";
 }

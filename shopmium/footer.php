@@ -4,10 +4,9 @@
       <h2>Schedule a demo</h2>
       <div class="ms-orange-separator" id="ms-separator-title-modal"></div>
   	</div>
-  	  <a href="#" class="ms-close-modal"><i class="fa fa-times" aria-hidden="true"></i></a>
+  	  <span class="ms-close-modal"><i class="fa fa-times" aria-hidden="true"></i></span>
       <?php echo do_shortcode( '[contact-form-7 id="10" title="Demo form"]' ); ?>
   </div>
-
 </div>
 
 
