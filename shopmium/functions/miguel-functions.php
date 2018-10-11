@@ -153,49 +153,63 @@ register_taxonomy('categories', ['downloads'], $args);
 add_action('init', 'create_categories_downloads');
 
 
-
-
+//
+//
 add_shortcode('testimonials','witness_testimonial');
 function witness_testimonial($atts){
-	$atts = shortcode_atts(array(
-		'type' => ''
-	), $atts);
-	$loop = new WP_Query(array(
-			'orderby'           => 'menu_order title',
-			'order'             => 'ASC',
-			'post_type'         => 'testimonials',
-			'tax_query'         => array( array(
-				'taxonomy'  => 'testimonial_categories',
-				'field'     => 'slug',
-				'terms'     => array( sanitize_title( $atts['type'] ) )
-			) )
-		) );?>
-		<div id="ms-wrapper-testimonials-section">
-			<div id="ms-slider-testimonials">
-					<?php if ( $loop->have_posts() ) :
-							while ( $loop->have_posts() ) : $loop->the_post(); ?>
-							<div id="ms-content-testi">
-								 <?php
-								 $image = get_field('customer_image');
-								 if( !empty($image) ): ?>
-									<img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" class="ms-image-customer-testi"/>
-								 <?php endif; ?>
-								 <p class="ms-quotation-testi">&#x0201C;</p>
-								 <p class="ms-comment-testi"><?php the_field('comment'); ?></p>
-								 <p class="ms-quotation-testi" id="ms-quotation-close">&#x0201C;</p>
-								 <h5><?php the_title();?> <span> - <?php the_field('customer_position');?></span></h5>
-								 <?php
-									$image_brand = get_field('brand_image');
-									if( !empty($image_brand ) ): ?>
-									 <img src="<?php echo $image_brand ['url']; ?>" alt="<?php echo $image_brand ['alt']; ?>" class="ms-img-brand-testi"/>
-									<?php endif; ?>
-							</div>
-						 <?php endwhile;
-						 endif;?>
-			</div>
-			 <?php wp_reset_postdata();?>
-		</div>
-<?php }
+		$atts = shortcode_atts(array(
+				'type' => ''
+		), $atts, 'testimonials');
+
+		set_query_var('testimony_type', $atts['type']);
+		switch ($atts['type']) {
+			case 'witness':
+					$loop = new WP_Query(array(
+								'orderby'           => 'menu_order title',
+								'order'             => 'ASC',
+								'post_type'         => 'testimonials',
+								'tax_query'         => array( array(
+										'taxonomy'  => 'testimonial_categories',
+										'field'     => 'slug',
+										'terms'     => array( sanitize_title( $atts['type'] ) )
+								) )
+						)); ?>
+					<div id="ms-wrapper-testimonials-section">
+						<div id="ms-slider-testimonials">
+								<?php if ( $loop->have_posts() ) :
+										while ( $loop->have_posts() ) : $loop->the_post(); ?>
+										<div id="ms-content-testi">
+											 <?php
+											 $image = get_field('customer_image');
+											 if( !empty($image) ): ?>
+												<img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" class="ms-image-customer-testi"/>
+											 <?php endif; ?>
+											 <p class="ms-quotation-testi">&#x0201C;</p>
+											 <p class="ms-comment-testi"><?php the_field('comment'); ?></p>
+											 <p class="ms-quotation-testi" id="ms-quotation-close">&#x0201C;</p>
+											 <h5><?php the_title();?> <span> - <?php the_field('customer_position');?></span></h5>
+											 <?php
+												$image_brand = get_field('brand_image');
+												if( !empty($image_brand ) ): ?>
+												 <img src="<?php echo $image_brand ['url']; ?>" alt="<?php echo $image_brand ['alt']; ?>" class="ms-img-brand-testi"/>
+												<?php endif; ?>
+										</div>
+									 <?php endwhile;
+									 endif;?>
+						</div>
+						 <?php wp_reset_postdata();?>
+					</div>
+				<?php
+				break;
+
+			case 'media':
+				get_template_part('template-parts/testimonials', 'media');
+				break;
+
+			default: '';
+				break;
+		}
+}
 
 
 add_shortcode('download','download_shopmium_resources');
@@ -217,15 +231,16 @@ function download_shopmium_resources($atts){
 			) )
 		) );?>
 		<div class="ms-container-resourced">
-		   <?php
-
+			 <?php
 			if ( $loop->have_posts() ) :
 			 while ( $loop->have_posts() ) : $loop->the_post();?>
 				<div class="ms-wrapper-resourced">
 					<?php $image = get_field('source_download');
 					if( !empty($image) ): ?>
-					<img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>"/>
-					<span class="ms-title-downloads"><a href="<?php echo $image['url'] ?>" download><?php the_title(); ?></span>
+					<a href="<?php echo $image['url'] ?>" download>
+					 <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>"/>
+					 <span class="ms-title-downloads"><?php the_title(); ?></span>
+					</a>
 					<?php endif;?>
 				</div>
 			 <?php endwhile;
@@ -236,7 +251,7 @@ function download_shopmium_resources($atts){
 					 $current_page = max(1, get_query_var('paged'));?>
 					 <div class="ms-paginator-resources">
 						 <?php
-							  echo paginate_links(array(
+								echo paginate_links(array(
 							 'base' => get_pagenum_link(1) . '%_%',
 							 'format' => '/page/%#%',
 							 'current' => $current_page,

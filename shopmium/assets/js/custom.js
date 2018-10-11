@@ -27,12 +27,12 @@ btn.onclick = function() {
 }
 
 closeModal.onclick = function() {
-    $(modal).fadeOut(1200);
+    $(modal).fadeOut(1000);
 }
 
 window.onclick = function(event) {
     if (event.target == modal) {
-        $(modal).fadeOut(1200);
+        $(modal).fadeOut(1000);
     }
 }
 
