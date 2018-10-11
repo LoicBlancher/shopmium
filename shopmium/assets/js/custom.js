@@ -37,12 +37,6 @@ window.onclick = function(event) {
 }
 
 
-
-
-
-
-
-
  });
 });
 

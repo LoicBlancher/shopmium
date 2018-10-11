@@ -217,54 +217,120 @@ function download_shopmium_resources($atts){
 	$atts = shortcode_atts(array(
 		'resource' => ''
 	), $atts);
-	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 	$loop = new WP_Query(array(
-			'orderby'           => 'menu_order title',
-			'order'             => 'ASC',
 			'post_type'         => 'downloads',
-			'posts_per_page'    => 6,
-			'paged'             => $paged,
+			'posts_per_page'    => '6',
 			'tax_query'         => array( array(
 				'taxonomy'  => 'categories',
 				'field'     => 'slug',
 				'terms'     => array( sanitize_title( $atts['resource'] ) )
 			) )
 		) );?>
-		<div class="ms-container-resourced">
-			 <?php
-			if ( $loop->have_posts() ) :
-			 while ( $loop->have_posts() ) : $loop->the_post();?>
-				<div class="ms-wrapper-resourced">
-					<?php $image = get_field('source_download');
-					if( !empty($image) ): ?>
-					<a href="<?php echo $image['url'] ?>" download>
-					 <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>"/>
-					 <span class="ms-title-downloads"><?php the_title(); ?></span>
-					</a>
-					<?php endif;?>
-				</div>
-			 <?php endwhile;
-			 $total_pages = $loop->max_num_pages;
-
-				 if ($total_pages > 1){
-
-					 $current_page = max(1, get_query_var('paged'));?>
-					 <div class="ms-paginator-resources">
-						 <?php
-								echo paginate_links(array(
-							 'base' => get_pagenum_link(1) . '%_%',
-							 'format' => '/page/%#%',
-							 'current' => $current_page,
-							 'total' => $total_pages,
-							 'prev_text'    => __('« prev'),
-							 'next_text'    => __('next »'),
-						 ));?>
-					 </div>
-				 <?php }
-			endif;
-			wp_reset_postdata();?>
+		<div id="ms-wrapper-resources">
+			<ul id="ms-resources-list">
+			<?php
+				if ( $loop->have_posts() ) :
+				 while ( $loop->have_posts() ) : $loop->the_post();?>
+					<li id="post-<?php the_ID(); ?>"<?php post_class('resource'); ?>>
+							<?php $image = get_field('source_download');
+							if( !empty($image) ): ?>
+								<a href="<?php echo $image['url'] ?>" download>
+								 <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>"/>
+								 <span class="ms-title-downloads"><?php the_title(); ?></span>
+								</a>
+							<?php endif;?>
+					</li>
+				 <?php endwhile;
+				endif;
+				wp_reset_postdata();?>
+			</ul>
 		</div>
+		<a class="load_more" data-nonce="<?php echo wp_create_nonce('load_posts') ?>" href="javascript:;">
+			<i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+			<?php echo "Cargar más"; ?>
+		</a>
 <?php
 }
 
+
+add_action( "wp_ajax_load_more", "load_more_func" );
+add_action( "wp_ajax_nopriv_load_more", "load_more_func" );
+
+
+function load_more_func() {
+    if ( !wp_verify_nonce( $_REQUEST['nonce'], "load_posts" ) ) {
+      exit("");
+    }
+  $offset = isset($_REQUEST['offset'])?intval($_REQUEST['offset']):6;
+  $posts_per_page = isset($_REQUEST['posts_per_page'])?intval($_REQUEST['posts_per_page']):6;
+  $post_type = isset($_REQUEST['post_type'])?$_REQUEST['post_type']:'downloads';
+
+  ob_start();
+  $args = array(
+        'post_type'=>$post_type,
+        'offset' => $offset,
+        'posts_per_page' => $posts_per_page,
+          );
+  $posts_query = new WP_Query( $args );
+  if ($posts_query->have_posts()) {
+      $result['have_posts'] = true;
+      $result['quantity'] = $posts_query->post_count;
+
+      while ( $posts_query->have_posts() ) : $posts_query->the_post(); ?>
+      <li id="post-<?php the_ID(); ?>"<?php post_class('resource affichar'); ?> style="display: none;">
+      							<?php $image = get_field('source_download');
+      							if( !empty($image) ): ?>
+      								<a href="<?php echo $image['url'] ?>" download>
+      								 <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>"/>
+      								 <span class="ms-title-downloads"><?php the_title(); ?></span>
+      								</a>
+      							<?php endif;?>
+      					</li>
+      <?php endwhile;
+    $result['html'] = ob_get_clean();
+  } else {
+    $result['have_posts'] = false;
+  }
+        if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+            $result = json_encode($result);
+            echo $result;
+        }
+        else {
+            header("Location: ".$_SERVER["HTTP_REFERER"]);
+        }
+  die();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ?>
+
+
