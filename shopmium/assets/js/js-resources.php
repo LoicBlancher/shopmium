@@ -21,7 +21,6 @@
 	             success: function(response) {
 	           if (response['have_posts'] == 1){
 	             var $newElems = $(response['html'].replace(/(\r\n|\n|\r)/gm, ''));
-	console.log($newElems);
 	             $('#ms-resources-list').append($newElems);
 	             $('.'+nonce).addClass('downloads');
 	             $('.'+nonce).fadeIn(1300);
