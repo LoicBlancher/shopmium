@@ -16,10 +16,10 @@ function shopnium_scripts()
 
 add_action('init', 'shopnium_scripts'); // Add Custom Scripts to wp_head
 
-function shopmium_styles()
+function shopmium_styles_m()
 {
 
-	wp_register_style('custommig', get_stylesheet_directory_uri() . '/assets/scss/miguel.css', array(), '1.0', 'all');
+	wp_register_style('custommig', get_stylesheet_directory_uri() . '/dist/css/miguel.css', array(), '1.0', 'all');
 	wp_enqueue_style('custommig'); // Enqueue it!
 
 	wp_register_style('slickt', get_stylesheet_directory_uri() . '/assets/scss/slick-theme.css', array(), '1.0', 'all');
@@ -30,7 +30,7 @@ function shopmium_styles()
 
 }
 
-add_action('wp_enqueue_scripts', 'shopmium_styles');
+add_action('wp_enqueue_scripts', 'shopmium_styles_m');
 
 
 
@@ -156,6 +156,9 @@ add_action('init', 'create_categories_downloads');
 //
 //
 add_shortcode('testimonials','witness_testimonial');
+
+ob_start();
+
 function witness_testimonial($atts){
 		$atts = shortcode_atts(array(
 				'type' => ''
@@ -200,6 +203,7 @@ function witness_testimonial($atts){
 						 <?php wp_reset_postdata();?>
 					</div>
 				<?php
+				return ob_get_clean();
 				break;
 
 			case 'media':
@@ -213,6 +217,8 @@ function witness_testimonial($atts){
 
 
 add_shortcode('download','download_shopmium_resources');
+ob_start();
+
 function download_shopmium_resources($atts){
 	$atts = shortcode_atts(array(
 		'resource' => ''
@@ -246,12 +252,11 @@ function download_shopmium_resources($atts){
 			</ul>
 		</div>
 		<a class="load_more" data-nonce="<?php echo wp_create_nonce('load_posts') ?>" href="javascript:;">
-			<i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
-			<?php echo "Cargar más"; ?>
+		  <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+		  <?php echo "Cargar más"; ?>
 		</a>
-<?php
+		<?php return ob_get_clean();
 }
-
 
 add_action( "wp_ajax_load_more", "load_more_func" );
 add_action( "wp_ajax_nopriv_load_more", "load_more_func" );
@@ -278,14 +283,14 @@ function load_more_func() {
 
       while ( $posts_query->have_posts() ) : $posts_query->the_post(); ?>
       <li id="post-<?php the_ID(); ?>"<?php post_class('resource affichar'); ?> style="display: none;">
-      							<?php $image = get_field('source_download');
-      							if( !empty($image) ): ?>
-      								<a href="<?php echo $image['url'] ?>" download>
-      								 <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>"/>
-      								 <span class="ms-title-downloads"><?php the_title(); ?></span>
-      								</a>
-      							<?php endif;?>
-      					</li>
+                    <?php $image = get_field('source_download');
+                    if( !empty($image) ): ?>
+                      <a href="<?php echo $image['url'] ?>" download>
+                       <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>"/>
+                       <span class="ms-title-downloads"><?php the_title(); ?></span>
+                      </a>
+                    <?php endif;?>
+                </li>
       <?php endwhile;
     $result['html'] = ob_get_clean();
   } else {
@@ -300,35 +305,6 @@ function load_more_func() {
         }
   die();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ?>
