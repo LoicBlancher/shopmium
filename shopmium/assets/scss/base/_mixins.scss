@@ -1,0 +1,54 @@
+/**
+* Mixins Custom
+* @author Gradiweb | Frontend: @krobing
+* @link https://www.gradiweb.com
+* --------------------------------------
+*/
+
+//
+// Table of content
+//
+// 01. grid mixins
+// 02. colors mixins
+
+//
+// Variables
+//
+
+// 02. colors mixins
+// Gradient diagonal
+@mixin gradient-diagonal($startColor: #3C3C3C, $endColor: #999999, $image: false) {
+  @if opacity($startColor) == 1 {
+    background-color: $startColor;
+  }
+
+  @if $image {
+    background-image: url($image);
+  }
+  // background-image: -webkit-gradient(-45deg, left top, left bottom, from($startColor), to($endColor)) if($image, unquote(", url(#{$image})"), '');
+  background-image: if($image, unquote("url(#{$image}), "), null) -webkit-linear-gradient(-45deg, $startColor, $endColor);
+  background-image: if($image, unquote("url(#{$image}), "), null)    -moz-linear-gradient(-45deg, $startColor, $endColor);
+  background-image: if($image, unquote("url(#{$image}), "), null)     -ms-linear-gradient(-45deg, $startColor, $endColor);
+  background-image: if($image, unquote("url(#{$image}), "), null)      -o-linear-gradient(-45deg, $startColor, $endColor);
+  background-image: if($image, unquote("url(#{$image}), "), null)         linear-gradient(135deg, $startColor, $endColor);
+  filter:            progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$startColor}', endColorStr='#{$endColor}', GradientType=1);
+
+}
+
+// Gradient vertical
+@mixin gradient-vertical( $startColor: #3C3C3C, $endColor: #999999, $image: false ) {
+  @if opacity($startColor) == 1 {
+    background-color: $startColor;
+  }
+
+  @if $image {
+    background-image: url($image);
+  }
+
+  background-image: if($image, unquote("url(#{$image}), "), null) -webkit-linear-gradient(top, $startColor 0%, $endColor 99%);
+  background-image: if($image, unquote("url(#{$image}), "), null)    -moz-linear-gradient(top, $startColor 0%, $endColor 99%);
+  background-image: if($image, unquote("url(#{$image}), "), null)     -ms-linear-gradient(top, $startColor 0%, $endColor 99%);
+  background-image: if($image, unquote("url(#{$image}), "), null)      -o-linear-gradient(top, $startColor 0%, $endColor 99%);
+  background-image: if($image, unquote("url(#{$image}), "), null)         linear-gradient(top bottom, $startColor 0%, $endColor 99%);
+  filter:            progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$startColor}', endColorStr='#{$endColor}', GradientType=0);
+}

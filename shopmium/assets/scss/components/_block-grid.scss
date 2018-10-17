@@ -1,0 +1,109 @@
+//
+// Block Grid Variables
+//
+
+// We use this to control the maximum number of block grid elements per row
+$block-grid-elements: 12 !default;
+$block-grid-default-spacing: 20px !default;
+
+$align-block-grid-to-grid: false !default;
+@if $align-block-grid-to-grid {
+  $block-grid-default-spacing: 30px;
+}
+
+//
+// Block Grid Mixins
+//
+
+// Create a custom block grid
+//
+// $per-row - # of items to display per row. Default: false.
+// $spacing - # of ems to use as padding on each block item. Default: rem-calc(20).
+// $include-spacing - Adds padding to our list item. Default: true.
+// $base-style - Apply a base style to block grid. Default: true.
+@mixin block-grid(
+  $per-row:false,
+  $spacing:$block-grid-default-spacing,
+  $include-spacing:true,
+  $base-style:true) {
+
+  @if $base-style {
+    display: block;
+    padding: 0;
+    @if $align-block-grid-to-grid {
+      margin: 0;
+    } @else {
+      margin: 0 (-$spacing/2);
+    }
+    @include clearfix;
+
+    > li {
+      display: block;
+      float: left;
+      height: auto;
+      @if $include-spacing {
+        padding: 0 ($spacing/2) $spacing;
+      }
+    }
+  }
+
+  @if $per-row {
+    > li {
+      list-style: none;
+      @if $include-spacing {
+        padding: 0 ($spacing/2) $spacing;
+      }
+      width: 100%/$per-row;
+
+      &:nth-of-type(1n) { clear: none; }
+      &:nth-of-type(#{$per-row}n+1) { clear: both; }
+      @if $align-block-grid-to-grid {
+        @include block-grid-aligned($per-row, $spacing);
+      }
+    }
+  }
+}
+
+@mixin block-grid-aligned($per-row, $spacing) {
+  @for $i from 1 through $block-grid-elements {
+    @if $per-row >= $i {
+      $grid-column: '+' + $i;
+      @if $per-row == $i {
+        $grid-column: '';
+      }
+      &:nth-of-type(#{$per-row}n#{unquote($grid-column)}) {
+        padding-left: ($spacing - (($spacing / $per-row) * ($per-row - ($i - 1))));
+        padding-right: ($spacing - (($spacing / $per-row) * $i));
+      }
+    }
+  }
+}
+
+// Generate presentational markup for block grid.
+//
+// $size - Name of class to use, i.e. "lg" will generate .lg-block-grid-1, .lg-block-grid-2, etc.
+@mixin block-grid-html-classes($size, $include-spacing) {
+  @for $i from 1 through $block-grid-elements {
+    .#{$size}-block-grid-#{($i)} {
+      @include block-grid($i, $block-grid-default-spacing, $include-spacing, false);
+    }
+  }
+}
+
+[class*="block-grid-"] { @include block-grid; }
+
+@media only screen {
+  @include block-grid-html-classes($size:xs, $include-spacing:false);
+}
+
+@media (min-width: 768px) {
+  @include block-grid-html-classes($size:sm, $include-spacing:false);
+}
+
+@media (min-width: 992px) {
+  @include block-grid-html-classes($size:md, $include-spacing:false);
+}
+
+@media (min-width: 1200px) {
+  @include block-grid-html-classes($size:lg, $include-spacing:false);
+}

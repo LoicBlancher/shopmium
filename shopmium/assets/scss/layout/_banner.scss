@@ -1,0 +1,20 @@
+//
+// Banner styles
+//
+.rp-top-banner-container {
+  color: $white;
+
+  * { color: inherit; }
+
+  .heading-text {
+
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: $text-regular !important;
+      * { font-weight: inherit !important; }
+    }
+    p { font-size: 22px;  }
+  }
+}
+.rp-banner-image-centered {
+  .icon-media { margin: 0 auto !important; }
+}

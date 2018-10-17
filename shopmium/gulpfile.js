@@ -13,7 +13,7 @@ var ftp        = require( 'vinyl-ftp' );
 var fs         = require('fs');
 
 // Initial variables
-var outputPath = 'dist/js';
+var outputPath = 'dist';
 var modulesPath = 'node_modules/';
 
 // Check for --production flag
@@ -30,6 +30,8 @@ var COMPATIBILITY = [
 // File paths to various assets are defined here.
 var PATHS = {
   sass: [
+    modulesPath + 'bourbon/core',
+    modulesPath + '@fortawesome/'
   ],
   javascript: [
     // jQuery
@@ -53,8 +55,8 @@ var PATHS = {
   pkg: [
     '**/*',
     '!**/node_modules/**',
-    '!assets/js/**',
     '!**/scss/**',
+    '!assets/js/**',
     '!**/gulpfile.js',
     '!**/package.json',
     '!**/package-lock.json',
@@ -68,26 +70,45 @@ var PATHS = {
 // move slick fonts to dist/fonst/ directory
 // PATHS.copy[modulesPath + 'slick-carousel/slick/fonts/**'] = outputPath + '/fonts/';
 // move font awesome web fonts to dist/font directory
-// PATHS.copy[modulesPath + '@fortawesome/fontawesome-free/webfonts/fa-brands-**'] = outputPath + '/fonts/';
-// PATHS.copy[modulesPath + '@fortawesome/fontawesome-free/webfonts/fa-solid-**'] = outputPath + '/fonts/';
-// PATHS.copy[modulesPath + '@fortawesome/fontawesome-free/webfonts/fa-regular-**'] = outputPath + '/fonts/';
+PATHS.copy[modulesPath + '@fortawesome/fontawesome-free/webfonts/fa-brands-**'] = outputPath + '/fonts/';
+PATHS.copy[modulesPath + '@fortawesome/fontawesome-free/webfonts/fa-solid-**'] = outputPath + '/fonts/';
+PATHS.copy[modulesPath + '@fortawesome/fontawesome-free/webfonts/fa-regular-**'] = outputPath + '/fonts/';
 
 // images
 // ------
 //move slick's images to dist/image
 // PATHS.copy[modulesPath +'slick-carousel/slick/**.{png,gif}'] = outputPath +'/image/';
 
-// Compile Sass into CSS
+// Compile Boostrap Sass into CSS
 // In production, the CSS is compressed
-gulp.task('sass', function() {
+// gulp.task('bootstrap', function() {
+//   return gulp.src('assets/scss/bootstrap.scss')
+//     .pipe($.sourcemaps.init())
+//     .pipe($.sass({
+//       includePaths: [modulesPath + 'bootstrap-sass/assets/stylesheets']
+//     }))
+//     .on('error', $.notify.onError({
+//       message: "<%= error.message %>",
+//       title: "Sass Error"
+//     }))
+//     .pipe($.autoprefixer({
+//       browsers: COMPATIBILITY
+//     }))
+//     // Minify CSS if run with --production flag
+//     .pipe($.if(isProduction, cleanCSS()))
+//     .pipe($.if(!isProduction, $.sourcemaps.write('.')))
+//     .pipe(gulp.dest('dist/css'));
+// });
+
+gulp.task('sass', /*['bootstrap'],*/ function() {
   return gulp.src('assets/scss/app.scss')
     .pipe($.sourcemaps.init())
     .pipe($.sass({
       includePaths: PATHS.sass
     }))
     .on('error', $.notify.onError({
-        message: "<%= error.message %>",
-        title: "Sass Error"
+      message: "<%= error.message %>",
+      title: "Sass Error"
     }))
     .pipe($.autoprefixer({
       browsers: COMPATIBILITY
@@ -133,7 +154,7 @@ gulp.task('javascript', function() {
     }))
     .pipe($.if(isProduction, uglify))
     .pipe($.if(!isProduction, $.sourcemaps.write()))
-    .pipe(gulp.dest(outputPath));
+    .pipe(gulp.dest(outputPath +'/js'));
 });
 
 // Copy files
@@ -195,24 +216,28 @@ gulp.task( 'deploy', function () {
   var ftpCredentials = JSON.parse(fs.readFileSync('./config.json')).ftp_credentials;
       ftpCredentials['log'] = $.util.log;
   var ftpConn = ftp.create(ftpCredentials);
+
   var globs = [
-      '**/*',
+      'dist/css/app.**',
+      'dist/js/build.js',
+      'dist/fonts/**',
+      'functions/robin-functions.php',
+      'template-parts/loop-members.php',
+      'template-parts/testimonials-**.php',
+      '!**/assets/scss/**',
+      '!**/assets/js/**',
       '!**/node_modules/**',
-      '!**/dist/css/**',
-      '!**/dist/js/**',
-      // '!**/js/**',
-      // '!**/sass/**',
-      // '!**/gulpfile.js',
+      '!**/gulpfile.js',
       // '!**/package.json',
       '!**/config.json',
-      // '!**/package-lock.json',
+      '!**/package-lock.json',
       '!**/packaged/*'
   ];
   // using base = '.' will transfer everything to /public_html correctly
   // turn off buffering in gulp.src for best performance
   return gulp.src( globs, { base: '.', buffer: false } )
-      .pipe( ftpConn.newerOrDifferentSize( '/' ) ) // only upload newer files
-      .pipe( ftpConn.dest( '/' ) );
+      .pipe( ftpConn.newerOrDifferentSize( '/shopmium/wp-content/themes/shopmium/' ) ) // only upload newer and different size files
+      .pipe( ftpConn.dest( '/shopmium/wp-content/themes/shopmium/' ) );
 });
 
 // Default gulp task

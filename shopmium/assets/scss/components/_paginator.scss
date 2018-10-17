@@ -1,0 +1,22 @@
+//
+// Paginator styles
+//
+// .isotope-pagination { height: auto !important; }
+
+// pagination default
+// ------------------
+.pagination-with-dots {
+  > li {
+    > span { width: 25px; }
+
+    .page-numbers {
+      display: block; border-radius: 50%; @include size(8px); line-height: 8px; background-color: $gainsboro; color: transparent !important;
+
+      &:hover, &:focus { color: transparent !important; background-color: lighten($gainsboro, 5%); }
+
+      &.current {
+        @include size(12px); line-height: 12px; background-color: $gainsboro;
+      }
+    }
+  }
+}

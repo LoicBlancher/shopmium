@@ -5,8 +5,8 @@
   "main": "gulpfile.js",
   "scripts": {
     "start": "gulp",
-    "dev": "gulp build --dev",
-    "build": "gulp build --production",
+    "build": "gulp build",
+    "production": "gulp build --production",
     "package": "gulp package --production"
   },
   "keywords": [],
@@ -39,5 +39,11 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/LoicBlancher/shopmium"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.4.0",
+    "bootstrap-sass": "^3.3.7",
+    "bourbon": "^5.1.0",
+    "slick-carousel": "^1.8.1"
   }
 }

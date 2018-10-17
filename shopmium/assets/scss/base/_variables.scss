@@ -1,0 +1,80 @@
+//
+// General variables for sass
+// Table of content
+//
+// a. general
+// b. structure
+// c. colors
+// d. typhografy
+// f. third parties
+
+// a. general
+$global-base-radius: 3px !default;
+
+// c. colors
+// ---------
+$white       : #FFFFFF;
+$ghost       : #FAFAFA;
+$snow        : #F9F9F9;
+$vapor       : #F6F6F6;
+$white-smoke : #F5F5F5;
+$silver      : #EFEFEF;
+$smoke       : #EEEEEE;
+$gris        : #E6E6E6;
+$gainsboro   : #DDDDDD;
+$iron        : #CCCCCC;
+$dark-silver : #BBBBBB;
+$base        : #AAAAAA;
+$aluminum    : #999999;
+$jumbo       : #888888;
+$monsoon     : #777777;
+$steel       : #666666;
+$charcoal    : #555555;
+$tuatara     : #444444;
+$oil         : #2E2E2E;
+$jet         : #222222;
+$black       : #000000;
+
+$primary-color: #ff8f7a !default;
+$bg-default: $white !default;
+$secundary-color: #f01f74 !default;
+
+// d. typhografy
+// -------------
+// size
+$text-tiny: 12px !default;
+$text-small: 14px !default;
+$text-medium: 1em !default;
+$text-large: 18px !default;
+$text-xlarge: 20px !default;
+
+// weight
+$text-lighter: 200 !default;
+$text-light: 300 !default;
+$text-normal: normal !default;
+$text-regular: 500 !default;
+$text-bold: 600 !default;
+$text-strong: 900 !default;
+
+// fonts base
+// $font-family-base: $font-stack-helvetica;
+$text-color: #5c6670;
+$font-size-base: 15px;
+$line-height-base: 1.4;
+$letter-spacing-base: 0;
+
+
+// f. third parties
+// ----------------
+
+// Slick.js
+// @slick-loader-path: './image/';
+
+// Font awesome
+$fa-font-path: '../fonts';
+$fa-font-size-base: $font-size-base;
+
+// Bourbone
+$bourbon: (
+  "global-font-file-formats": ("ttf", "woff2", "woff", "svg", "eot")
+);

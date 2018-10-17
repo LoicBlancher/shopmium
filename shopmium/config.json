@@ -1,0 +1,8 @@
+{
+	"ftp_credentials": {
+    "host": "ftp.graditest.com",
+    "user": "test@graditest.com",
+    "password": "hJEP~mThzulq",
+    "parallel": 10
+  }
+}

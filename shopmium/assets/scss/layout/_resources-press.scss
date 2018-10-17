@@ -1,0 +1,12 @@
+//
+// Styles for resources - press page
+//
+
+.rp-media-testimonials-grid {
+  .rp-media-testimonials-item {
+    height: 110px; line-height: 110px; padding-bottom: 30px;
+
+    > a { display: block; }
+    img { max-height: 100%; width: auto; max-width: 100%; }
+  }
+}

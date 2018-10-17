@@ -1,0 +1,58 @@
+//
+// Header styles
+//
+.menu-wrapper {
+  position: absolute;
+}
+#masthead {
+  .menu-container {
+    background: transparent; border: none; box-shadow: none; transition: all 300ms ease-out;
+  }
+
+  .logo-container {
+    @include padding(15px null);
+
+    .logo-image {
+      height: 53px;
+      &.logo-light { display: block !important; }
+      &.logo-dark { display: none !important; }
+    }
+  }
+
+  // Nav menu
+  #menu-main-menu {
+    > li {
+      a { text-transform: uppercase; color: $white; font-weight: $text-normal; }
+
+      .drop-menu {
+        border-radius: $global-base-radius; @include padding(null 0);
+        > li {
+          a { color: $oil; }
+        }
+      }
+    }
+  }
+
+  &.is_stuck {
+    .menu-container { background: $white; border-bottom: 1px solid $dark-silver; }
+
+    #menu-main-menu {
+      > li {
+        > a {
+          color: $text-color;
+
+          &:hover, &:focus { border-bottom-color: $secundary-color; color: $secundary-color; }
+        }
+      }
+    }
+
+    .logo-container {
+      @include padding(15px null);
+
+      .logo-image {
+        &.logo-light { display: none !important; }
+        &.logo-dark { display: block !important; }
+      }
+    }
+  }
+}

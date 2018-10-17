@@ -1,0 +1,46 @@
+//
+// Font styles
+//
+
+// @Variables
+$path-to-fonts: '../fonts/' !default;
+$fontname-base: 'Helvetica Neue' !default;
+$fontprefix-base: 'HelveticaNeue' !default;
+
+$font-family-base: $font-stack-helvetica; // general
+
+// Font Helvetica Neue
+// -------------------
+@include font-face( $fontname-base, "#{$path-to-fonts}#{$fontprefix-base}-Bold" ) {
+  font-style: normal;
+  font-weight: bold;
+}
+@include font-face( $fontname-base, "#{$path-to-fonts}#{$fontprefix-base}Medium" ) {
+  font-style: normal;
+  font-weight: 500;
+}
+@include font-face( $fontname-base, "#{$path-to-fonts}#{$fontprefix-base}Regular" ) {
+  font-style: normal;
+  font-weight: normal;
+}
+
+
+// Custom texts
+// ------------
+.text-primary { color: $primary-color; }
+.text-secondary { color: $secundary-color; }
+
+// Text sizes
+.text-tiny { font-size: $text-tiny; }
+.text-small { font-size: $text-small; }
+.text-medium { font-size: $text-medium; }
+.text-large { font-size: $text-large; }
+.text-xlarge { font-size: $text-xlarge; }
+
+// Text weight
+.text-lighter { font-weight: $text-lighter; }
+.text-light { font-weight: $text-light; }
+.text-normal { font-weight: $text-normal; }
+.text-regular { font-weight: $text-regular; }
+.text-bold { font-weight: $text-bold; }
+.text-strong { font-weight: $text-strong; }
